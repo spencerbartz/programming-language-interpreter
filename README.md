@@ -1,4 +1,4 @@
-# recursive-descent-parser
+# Recursive Descent Parser
 Parses a Turing Complete programming language consisting of 8 symbols
 
 The language's machine model consists of the program and instruction pointer, as well as a one-dimensional array of at least 30,000 byte cells initialized to zero; 

@@ -2,48 +2,40 @@
 <head>
     <title>Recursive Descent Parser</title>
 
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script type="text/javascript" src="resources/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="resources/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <script type="text/javascript" src="parser.js"></script>
 </head>
 
 <body>
 
     <div id="overlay"></div>
 
-    <div id="main-content">
+    <div class="main-content">
         <div id="interpreter" class="rounded">
             <h3>Interpreter</h3>
             <p>
-                <textarea id="intrp_input" class="rounded"></textarea>
-                <input id="submit_intrp_input" type="submit" class="rounded" value="Run code" onclick="BFI.interpret('intrp_input')" />
+                <textarea id="bf-src" class="rounded"></textarea>
+                <button id="run-bf-src" type="button" class="rounded">Run code</button>
             </p>
             <p>
-                <textarea id="intrp_output" class="rounded"></textarea>
-                <input id="clear_intrp_output" type="submit" class="rounded" value="Clear"
-                    onclick="clearTextArea('intrp_output')" />
+                <textarea id="bf-output" class="rounded" disabled></textarea>
+                <button id="clear-bf-output" type="button" class="rounded">Clear</button>
             </p>
         </div>
 
         <div id="converter" class="rounded">
-            <h3>Text to source code converter (generates source code that prints the text submitted)</h3>
+            <h3>Text to source code converter</h3>
             <p>
-                <textarea id="conv_input" class="rounded"></textarea>
-                <input id="submit_conv_input" type="submit" class="rounded" value=" Convert to Brainfuck! "
-                    onclick="BFI.asciiToBF('conv_input')" />
+                <textarea id="txt-src" class="rounded"></textarea>
+                <button id="convert-txt-src" type="button" class="rounded">Convert</button>
             </p>
             <p>
-                <textarea id="conv_output" class="rounded"></textarea>
-                <input id="clear_conv_output" type="submit" class="rounded" value="Clear"
-                    onclick="clearTextArea('conv_output')" />
+                <textarea id="convert-output" class="rounded" disabled></textarea>
+                <button id="clear-convert-output" type="button" class="rounded">Clear</button>
+                <button id="copy-to-interperter" type="button">Copy To Interpreter</button>
             </p>
         </div>
     </div>
-
-    <script type="text/javascript">
-        BFI.initialize(30000, 'intrp_output', 'conv_output');
-    </script>
-
 </body>
 
 </html>
