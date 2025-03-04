@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+    <title>Programming Language Interpreter</title>
+
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <script type="text/javascript" src="parser.js"></script>
+</head>
+
+<body>
+
+    <div id="overlay"></div>
+
+    <div class="main-content">
+        <div id="interpreter" class="rounded">
+            <h3>Interpreter</h3>
+            <p>
+                <textarea id="bf-src" class="rounded"></textarea>
+                <button id="run-bf-src" type="button" class="rounded">Run code</button>
+            </p>
+            <p>
+                <textarea id="bf-output" class="rounded" disabled></textarea>
+                <button id="clear-bf-output" type="button" class="rounded">Clear</button>
+            </p>
+        </div>
+
+        <div id="converter" class="rounded">
+            <h3>Text to source code converter</h3>
+            <p>
+                <textarea id="txt-src" class="rounded"></textarea>
+                <button id="convert-txt-src" type="button" class="rounded">Convert</button>
+            </p>
+            <p>
+                <textarea id="convert-output" class="rounded" disabled></textarea>
+                <button id="clear-convert-output" type="button" class="rounded">Clear</button>
+                <button id="copy-to-interperter" type="button">Copy To Interpreter</button>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
