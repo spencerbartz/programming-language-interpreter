@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <title>Recursive Descent Parser</title>
+
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script type="text/javascript" src="resources/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="resources/script.js"></script>
+</head>
+
+<body>
+
+    <div id="overlay"></div>
+
+    <div id="main-content">
+        <div id="interpreter" class="rounded">
+            <h3>Interpreter</h3>
+            <p>
+                <textarea id="intrp_input" class="rounded"></textarea>
+                <input id="submit_intrp_input" type="submit" class="rounded" value="Run code" onclick="BFI.interpret('intrp_input')" />
+            </p>
+            <p>
+                <textarea id="intrp_output" class="rounded"></textarea>
+                <input id="clear_intrp_output" type="submit" class="rounded" value="Clear"
+                    onclick="clearTextArea('intrp_output')" />
+            </p>
+        </div>
+
+        <div id="converter" class="rounded">
+            <h3>Text to source code converter (generates source code that prints the text submitted)</h3>
+            <p>
+                <textarea id="conv_input" class="rounded"></textarea>
+                <input id="submit_conv_input" type="submit" class="rounded" value=" Convert to Brainfuck! "
+                    onclick="BFI.asciiToBF('conv_input')" />
+            </p>
+            <p>
+                <textarea id="conv_output" class="rounded"></textarea>
+                <input id="clear_conv_output" type="submit" class="rounded" value="Clear"
+                    onclick="clearTextArea('conv_output')" />
+            </p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        BFI.initialize(30000, 'intrp_output', 'conv_output');
+    </script>
+
+</body>
+
+</html>
