@@ -1,8 +1,8 @@
 class Interpreter {
     static symbols = [ '>', '<', ',', '.', '+', '-', '[', ']', '#' ];
 
-    constructor() {
-        this.reset();
+    constructor(cellSize) {
+        this.reset(cellSize);
     }
 
     reset(cellSize = 30000) {
@@ -15,6 +15,20 @@ class Interpreter {
         this.inputBuffer = '';
         this.inputPointer = 0;
         this.outputBuffer = '';
+    }
+
+    getState() {
+        return {
+            'cells': this.cells,
+            'currentCell': this.currentCell,
+            'stack': this.stack,
+            'curChar': this.curChar,
+            'curCharPos': this.curCharPos,
+            'curSrcLine': this.currentSrcLine,
+            'inputBuffer': this.inputBuffer,
+            'inputPointer': this.inputPointer,
+            'outputBuffer': this.outputBuffer,
+        };
     }
 
     getSymbols() {
@@ -80,7 +94,6 @@ class Interpreter {
                 default:
                     break;
             }
-
         }
     }
 
@@ -111,7 +124,7 @@ class Interpreter {
         
         let loopCount = 0;
         
-        while(this.cells[this.currentCell] > 0) {
+        while (this.cells[this.currentCell] > 0) {
             loopCount++;
             this.parse(newBlock);
         }
@@ -187,7 +200,7 @@ class Interpreter {
     
     // Generates a program that prints the given text, interpreted as ascii
     asciiToSrc(asciiText) {
-        let bfOutput = '[-]>[-]<\n';
+        let srcOutput = '[-]>[-]<\n';
         let lastChar = '\0';
         let codeDiff = 0; //difference in ascii code from last char read
         
@@ -195,7 +208,7 @@ class Interpreter {
             codeDiff = asciiText.charCodeAt(i) - lastChar.charCodeAt(0);
             
             if (codeDiff === 0) {
-                bfOutput += '>.<\n';
+                srcOutput += '>.<\n';
                 continue;
             }
             
@@ -203,24 +216,24 @@ class Interpreter {
         
             // Set loop counter for block
             for (let j = 0; j < factors[0]; j++) {
-                bfOutput += '+';
+                srcOutput += '+';
             }
             
             //start loop block
-            bfOutput += '[>';
+            srcOutput += '[>';
             
             for (let j = 0; j < factors[1]; j++) {
                 if (codeDiff > 0) {
-                    bfOutput += '+';
+                    srcOutput += '+';
                 } else if (codeDiff < 0) {
-                    bfOutput += '-';
+                    srcOutput += '-';
                 }
             }
             
-            bfOutput += '<-]>.<\n';
+            srcOutput += '<-]>.<\n';
             lastChar = asciiText.charAt(i);
         }
-        return bfOutput;
+        return srcOutput;
     }
 }
 
