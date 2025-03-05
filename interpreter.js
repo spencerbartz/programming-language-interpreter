@@ -1,23 +1,24 @@
-class Parser {
-    static bfSymbols = [ '>', '<', ',', '.', '+', '-', '[', ']', '#' ];
+class Interpreter {
+    static symbols = [ '>', '<', ',', '.', '+', '-', '[', ']', '#' ];
 
-    constructor(bufferSize = 30000) {
-        this.reset(bufferSize);
+    constructor() {
+        this.reset();
     }
 
-    reset(bufferSize) {
-        this.cells = Array(bufferSize).fill(0);
+    reset(cellSize = 30000) {
+        this.cells = Array(cellSize).fill(0);
         this.currentCell = 0;
         this.stack = [];
         this.curChar = '';
         this.curCharPos = 0;
-        this.inputText = '';
-        this.curInputLine = 0;
+        this.currentSrcLine = 0;
+        this.inputBuffer = '';
+        this.inputPointer = 0;
         this.outputBuffer = '';
     }
 
-    getBfSymbols() {
-        return Parser.bfSymbols;
+    getSymbols() {
+        return Parser.symbols;
     }
 
     get output() {
@@ -26,6 +27,19 @@ class Parser {
 
     set output(outputText) {
         this.outputBuffer = outputText;
+    }
+
+    interpret(inputBuffer, source) {
+        this.reset();
+        this.inputBuffer = inputBuffer;
+        
+        try { 
+            this.parse(source); 
+        } catch (error) {
+            console.error(`${error.name}: ${error.message}`);
+        }
+
+        return this.outputBuffer;
     }
 
     parse(text) {
@@ -41,7 +55,7 @@ class Parser {
                     break;
                 case ',': 
                     this.get();
-                    break
+                    break;
                 case '.':
                     this.put();
                     break;
@@ -61,14 +75,13 @@ class Parser {
                     this.dbg();
                     break;
                 case "\n": 
-                    this.curInputLine++;
+                    this.currentSrcLine++;
                     break;
                 default:
                     break;
             }
 
         }
-        return this.outputBuffer;
     }
 
     mvr() {
@@ -79,8 +92,9 @@ class Parser {
         this.currentCell--;
     }
     
-    get(character) {
-        this.cells[currentCell] = character.charCodeAt(0);
+    get() {
+        this.cells[this.currentCell] = this.inputBuffer.charCodeAt(this.inputPointer);
+        this.inputPointer++;
     }
     
     put() {
@@ -134,7 +148,7 @@ class Parser {
         }
         
         if (subStack.length > 0) {
-            throw 'Unmatched brace';
+            throw new Error('Unmatched brace');
         }
         
         return i;
@@ -210,27 +224,3 @@ class Parser {
     }
 }
 
-document.addEventListener('DOMContentLoaded', _ => {
-    document.getElementById('run-bf-src').addEventListener('click', (event) => {
-        let p = new Parser();
-        document.getElementById('bf-output').value = p.parse(document.getElementById('bf-src').value);
-    });
-
-    document.getElementById('clear-bf-output').addEventListener('click', (event) => {
-        document.getElementById('bf-output').value = '';
-    });
-
-    document.getElementById('convert-txt-src').addEventListener('click', (event) => {
-        let p = new Parser();
-        document.getElementById('convert-output').value = p.asciiToSrc(document.getElementById('txt-src').value);
-    });
-
-    document.getElementById('clear-convert-output').addEventListener('click', (event) => {
-        document.getElementById('convert-output').value = '';
-    });
-
-    document.getElementById('copy-to-interperter').addEventListener('click', (event) => {
-        document.getElementById('bf-src').value = document.getElementById('convert-output').value;
-        document.getElementById('convert-output').value = '';
-    });
-});

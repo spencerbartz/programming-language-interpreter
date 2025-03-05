@@ -3,7 +3,8 @@
     <title>Programming Language Interpreter</title>
 
     <link rel="stylesheet" type="text/css" href="stylesheet.css" />
-    <script type="text/javascript" src="parser.js"></script>
+    <script type="text/javascript" src="interpreter.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 </head>
 
 <body>
@@ -14,12 +15,21 @@
         <div id="interpreter" class="rounded">
             <h3>Interpreter</h3>
             <p>
+                <label for="bf-src">Enter Source Code:</label>
                 <textarea id="bf-src" class="rounded"></textarea>
+            </p>
+            <p>
+                <label for="bf-input">Enter Program Input:</label>
+                <input id="bf-input" type="text" class="rounded" />
+            </p>
+            <p>
                 <button id="run-bf-src" type="button" class="rounded">Run code</button>
             </p>
             <p>
+                <label for="bf-output">Program Output:</label>
                 <textarea id="bf-output" class="rounded" disabled></textarea>
-                <button id="clear-bf-output" type="button" class="rounded">Clear</button>
+                <button id="clear-bf-output" type="button" class="rounded">Clear Output</button>
+                <button id="clear-bf-src" type="button" class="rounded">Clear Code</button>
             </p>
         </div>
 
@@ -28,10 +38,11 @@
             <p>
                 <textarea id="txt-src" class="rounded"></textarea>
                 <button id="convert-txt-src" type="button" class="rounded">Convert</button>
+                <button id="clear-txt-src" type="button" class="rounded">Clear Text</button>
             </p>
             <p>
                 <textarea id="convert-output" class="rounded" disabled></textarea>
-                <button id="clear-convert-output" type="button" class="rounded">Clear</button>
+                <button id="clear-convert-output" type="button" class="rounded">Clear Generated Source</button>
                 <button id="copy-to-interperter" type="button">Copy To Interpreter</button>
             </p>
         </div>
