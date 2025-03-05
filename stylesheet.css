@@ -53,6 +53,12 @@ textarea:focus {
     border: 1px solid rgba(81, 203, 238, 1);
 }
 
+.rounded {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
 input[type="text"] {
 	outline: none;
 	padding: 3px 0px 3px 3px;
