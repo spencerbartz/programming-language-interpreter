@@ -1,7 +1,13 @@
 class InputStream {
+    #inputPointer;
+
     constructor(streamSource) {
         this.streamSource = streamSource;
-        this.inputPointer = 0;
+        this.#inputPointer = 0;
+    }
+
+    getInputPointer() {
+        return this.#inputPointer;
     }
 
     requestInput() {
@@ -9,8 +15,8 @@ class InputStream {
         if (this.streamSource.type === 'user') {
             input = prompt('Enter a value');
         } else if (this.streamSource.type === 'UI') {
-            input = this.streamSource.value.charAt(this.inputPointer);
-            this.inputPointer++;
+            input = this.streamSource.value.charAt(this.#inputPointer);
+            this.#inputPointer++;
         }
 
         if (!input) {
