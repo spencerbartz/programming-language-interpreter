@@ -144,6 +144,17 @@ class Interpreter {
         this.cells[this.currentCell]--;
     }
 
+    dbg() {
+        let dbgMsg = '';
+        let state = this.getState();
+
+        for (let key in state) {
+            dbgMsg += key + ' - ' + (Array.isArray(state[key]) ? JSON.stringify(state[key].filter(c => c).map(c => c['lbrace'] ?? c)) : state[key]) + " |\n";
+        }
+
+        console.log(dbgMsg);
+    }
+
     // start at left brace and find matching right brace position
     findMatchingBracePos(text) {
         let subStack = [];
