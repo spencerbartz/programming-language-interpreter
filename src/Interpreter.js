@@ -1,8 +1,9 @@
 class Interpreter {
     static symbols = [ '>', '<', ',', '.', '+', '-', '[', ']', '#' ];
 
-    constructor(cellSize) {
+    constructor(inputStream, cellSize) {
         this.reset(cellSize);
+        this.inputStream = inputStream;
     }
 
     reset(cellSize = 30000) {
@@ -43,9 +44,8 @@ class Interpreter {
         this.outputBuffer = outputText;
     }
 
-    interpret(inputBuffer, source) {
+    interpret(source) {
         this.reset();
-        this.inputBuffer = inputBuffer;
         
         try { 
             this.parse(source); 
@@ -106,8 +106,7 @@ class Interpreter {
     }
     
     get() {
-        this.cells[this.currentCell] = this.inputBuffer.charCodeAt(this.inputPointer);
-        this.inputPointer++;
+        this.cells[this.currentCell] = this.inputStream.requestInput();
     }
     
     put() {

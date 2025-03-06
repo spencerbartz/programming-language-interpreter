@@ -3,6 +3,7 @@
     <title>Programming Language Interpreter</title>
 
     <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <script type="text/javascript" src="src/InputStream.js"></script>
     <script type="text/javascript" src="src/Interpreter.js"></script>
     <script type="text/javascript" src="main.js"></script>
 </head>
@@ -21,6 +22,9 @@
             <p>
                 <label for="bf-input">Enter Program Input:</label>
                 <input id="bf-input" type="text" class="rounded" />
+                <label for="input-type">Or</label>
+                <input id="input-type" type="checkbox" value="manual">
+                Input Manually
             </p>
             <p>
                 <button id="run-bf-src" type="button" class="rounded">Run code</button>

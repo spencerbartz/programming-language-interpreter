@@ -1,9 +1,15 @@
 document.addEventListener('DOMContentLoaded', _ => {
+    document.getElementById('input-type').addEventListener('change', (event) => {
+        document.getElementById('bf-input').disabled = event.target.checked;
+    });
+
     document.getElementById('run-bf-src').addEventListener('click', (event) => {
-        let inputBuffer = document.getElementById('bf-input').value;
-        let source = document.getElementById('bf-src').value;
-        let bfi = new Interpreter();
-        document.getElementById('bf-output').value = bfi.interpret(inputBuffer, source);
+        const programInput = document.getElementById('bf-input');
+        const sourceCode = document.getElementById('bf-src').value;
+        const streamSource = programInput.disabled ? { 'type': 'user' } : { 'type': 'UI', 'value': programInput.value };
+        const is = new InputStream(streamSource);
+        const bfi = new Interpreter(is);
+        document.getElementById('bf-output').value = bfi.interpret(sourceCode);
     });
 
     document.getElementById('clear-bf-src').addEventListener('click', (event) => {
